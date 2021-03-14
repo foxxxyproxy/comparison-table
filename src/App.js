@@ -1,24 +1,26 @@
-import logo from './logo.svg';
-import './App.css';
+import { useEffect, useState } from "react";
+import styled from "styled-components";
+import testProducts from "./data";
+import { CompareTable } from "./components";
+import { mapItemsToObjects } from "./data-helpers";
+
+const Container = styled.main`
+  width: 95%;
+  margin: 0 auto;
+`;
 
 function App() {
+  const [products, setProducts] = useState(null);
+
+  useEffect(() => {
+    setProducts(mapItemsToObjects(testProducts));
+    console.log(Object.keys(testProducts[0]));
+  }, []);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <Container>{products && <CompareTable products={products} />}</Container>
+    </>
   );
 }
 
