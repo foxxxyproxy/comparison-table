@@ -3,6 +3,11 @@ import { useEffect, useState } from "react";
 import { features } from "../../data";
 import { sortByLabels } from "../../data-helpers";
 
+const TRow = styled.tr`
+  background: ${(props) => (props.isDiff ? "#eaeaea" : "#fff")};
+  display: ${(props) => (props.isEmpty ? "none" : "table-row")};
+`;
+
 const TableRow = (props) => {
   const { products, className } = props;
   const [rows, setRows] = useState(null);
@@ -11,16 +16,16 @@ const TableRow = (props) => {
   console.log({ features });
 
   useEffect(() => {
-    const featuresList = features.map((item) => item.value).sort();
+    const featuresList = features.map((item) => item.value);
     if (!featuresList) return;
 
     //create rows from data
     const rawRows = featuresList.map((item) => {
-      let futureType = features.find((feature) => feature.value === item).type;
+      let featureType = features.find((feature) => feature.value === item).type;
 
       return products.ids.map((id) => {
         //todo: row check
-        if (futureType === "String") {
+        if (featureType === "String") {
           return products[id][`${item}`].toString();
         } else {
           //we can parse numbers values later
@@ -39,18 +44,44 @@ const TableRow = (props) => {
     console.log({ rowsWithFeatures });
   }, [setRows, products]);
 
-  if (!features || !rows) return null;
+  function isDifferent(row, featureName) {
+    let currentFeature = features.find(
+      (feature) => feature.value === featureName
+    );
 
+    if (currentFeature.toCompare === "true") {
+      if (new Set(row).size > 1) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  function isEmpty(row) {
+    let set = new Set(row);
+    if (set.size === 1 && set.has("")) {
+      return true;
+    }
+    return false;
+  }
+
+  if (!features || !rows) return null;
   return (
     <>
       {features.map((feature) => {
         return (
-          <tr key={feature.value} className={className || feature.value}>
+          <TRow
+            key={feature.value}
+            className={className || feature.value}
+            isDiff={isDifferent(rows[feature.value], feature.value)}
+            isEmpty={isEmpty(rows[feature.value])}
+          >
             <th scope="row">{feature.label}</th>
+
             {rows[feature.value].map((row, index) => {
               return <td key={index}>{row}</td>;
             })}
-          </tr>
+          </TRow>
         );
       })}
     </>
