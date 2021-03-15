@@ -2,9 +2,11 @@ import styled from "styled-components";
 import { useEffect, useState } from "react";
 import { features } from "../../data";
 import { sortByLabels } from "../../data-helpers";
+import Badges from "./Badges";
 
 const TRow = styled.tr`
-  background: ${(props) => (props.isDiff ? "#eaeaea" : "#fff")};
+  background: ${(props) =>
+    props.isDiff ? props.theme.hightlightRow : props.theme.pageBackground};
   display: ${(props) => (props.isEmpty ? "none" : "table-row")};
 `;
 
@@ -41,7 +43,7 @@ const TableRow = (props) => {
     }
 
     setRows(rowsWithFeatures);
-    console.log({ rowsWithFeatures });
+    //console.log({ rowsWithFeatures });
   }, [setRows, products]);
 
   function isDifferent(row, featureName) {
@@ -68,6 +70,16 @@ const TableRow = (props) => {
   if (!features || !rows) return null;
   return (
     <>
+      <TRow>
+        <th scope="row">Keurmerk</th>
+        {products.ids.map((id) => {
+          return (
+            <td key={"Keurmerk" + id}>
+              <Badges linksList={products[id]["badges"]} />
+            </td>
+          );
+        })}
+      </TRow>
       {features.map((feature) => {
         return (
           <TRow
@@ -79,7 +91,7 @@ const TableRow = (props) => {
             <th scope="row">{feature.label}</th>
 
             {rows[feature.value].map((row, index) => {
-              return <td key={index}>{row}</td>;
+              return <td key={feature.value + products.ids[index]}>{row}</td>;
             })}
           </TRow>
         );

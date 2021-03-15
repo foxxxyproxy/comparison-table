@@ -210,7 +210,7 @@ export const features = [
   { value: "Kleur", label: "Kleur", type: "String", toCompare: "true" },
   {
     value: "Temperatuurgebied",
-    label: "Temperatuurgebied",
+    label: "Temperatuur gebied",
     type: "String",
     toCompare: "true",
   },
