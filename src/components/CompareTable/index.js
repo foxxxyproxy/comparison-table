@@ -1,6 +1,6 @@
 import styled from "styled-components";
-import { features } from "../../data";
 import { ProductCard } from "../";
+import TableRow from "./TableRow";
 
 const CompareTable = (props) => {
   const { products } = props;
@@ -50,16 +50,7 @@ const CompareTable = (props) => {
           </tr>
         </thead>
         <tbody>
-          {Object.keys(features).map((feature) => {
-            return (
-              <tr key={feature} className={feature}>
-                <th scope="row">{features[feature]}</th>
-                {products.ids.map((id) => {
-                  return <td key={id}>{products[id][`${feature}`]}</td>;
-                })}
-              </tr>
-            );
-          })}
+          <TableRow products={products} />
         </tbody>
       </Table>
     </>

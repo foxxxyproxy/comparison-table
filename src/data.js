@@ -130,7 +130,7 @@ const products = [
 ];
 export default products;
 
-export const features = {
+/* export const features = {
   Toepassing: "Toepassing",
   salePrice: "Sale price",
   manufacturerName: "Manufacturer name",
@@ -140,7 +140,7 @@ export const features = {
   Artikelnummer: "Artikelnummer",
   stepQuantity: "stepQuantity",
   BUP_Value: "BUP_Value",
-  //badges: "Keurmerk",
+  badges: "Keurmerk",
   uom: "uom",
   Kleur: "Kleur",
   //productImage: "productImage",
@@ -158,4 +158,30 @@ export const features = {
   channel: "channel",
   display: "display",
   //atp: "atp",
-};
+}; */
+
+export const features = [
+  { value: "Toepassing", label: "Toepassing", type: "String" },
+  { value: "salePrice", label: "Sale price", type: "Float" },
+  { value: "manufacturerName", label: "Manufacturer name", type: "String" },
+  { value: "Hardheid", label: "Hardheid", type: "String" },
+  { value: "grossPrice", label: "Gross price", type: "String" },
+  { value: "BUP_UOM", label: "BUP_UOM", type: "String" },
+  { value: "Artikelnummer", label: "Artikel nummer", type: "String" },
+  { value: "stepQuantity", label: "Step Quantity", type: "String" },
+  { value: "BUP_Value", label: "BUP_Value", type: "String" },
+  { value: "badges", label: "Keurmerk", type: "String" },
+  { value: "uom", label: "Uom", type: "String" },
+  { value: "Kleur", label: "Kleur", type: "String" },
+  { value: "Temperatuurgebied", label: "Temperatuurgebied", type: "String" },
+  { value: "BUP_Conversion", label: "BUP_Conversion", type: "String" },
+  { value: "minQuantity", label: "Min quantity", type: "String" },
+  { value: "Materiaal", label: "Materiaal", type: "String" },
+  { value: "sku", label: "Sku", type: "String" },
+  { value: "Snoerdikte", label: "Snoerdikte", type: "String" },
+  { value: "Inwendige diameter", label: "Inwendige diameter", type: "String" },
+  { value: "Maat volgens AS568", label: "Maat volgens AS568", type: "String" },
+  { value: "listPrice", label: "List price", type: "String" },
+  { value: "channel", label: "Channel", type: "String" },
+  { value: "display", label: "Display", type: "String" },
+];

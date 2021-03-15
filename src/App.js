@@ -14,7 +14,6 @@ function App() {
 
   useEffect(() => {
     setProducts(mapItemsToObjects(testProducts));
-    console.log(Object.keys(testProducts[0]));
   }, []);
 
   return (

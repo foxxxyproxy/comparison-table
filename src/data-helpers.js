@@ -18,3 +18,33 @@ export function mapItemsToObjects(items) {
     }),
   };
 }
+
+export function sortObjByKey(unordered) {
+  const ordered = Object.keys(unordered)
+    .sort()
+    .reduce((obj, key) => {
+      obj[key] = unordered[key];
+      return obj;
+    }, {});
+  return ordered;
+}
+
+/* export function sortArrBylabel(unordered) {
+  const ordered = Object.keys(unordered)
+    .sort()
+    .reduce((obj, key) => {
+      obj[key] = unordered[key];
+      return obj;
+    }, {});
+  return ordered;
+} */
+
+export function sortByLabels(a, b) {
+  if (a.label < b.label) {
+    return -1;
+  }
+  if (a.label > b.label) {
+    return 1;
+  }
+  return 0;
+}
