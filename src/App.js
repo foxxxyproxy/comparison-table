@@ -6,7 +6,7 @@ import { mapItemsToObjects } from "./data-helpers";
 
 const Container = styled.main`
   width: 95%;
-  margin: 0 auto;
+  margin: 5vh auto;
 `;
 
 function App() {

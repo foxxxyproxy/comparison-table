@@ -19,7 +19,6 @@ const ImageWrapper = styled.div`
 const Badges = (props) => {
   const { linksList } = props;
   const links = linksList.split("|");
-  console.log(links);
 
   if (!links) {
     return null;
@@ -30,11 +29,11 @@ const Badges = (props) => {
         {links.map((link, index) => {
           return (
             <Img
-              key={index}
+              key={`Badge${index}`}
               src={link}
               alt="Keurmerk"
-              width="40px"
-              height="40px"
+              width="40"
+              height="40"
             />
           );
         })}

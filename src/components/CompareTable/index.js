@@ -1,57 +1,91 @@
+import { useEffect, useState } from "react";
 import styled from "styled-components";
-import { ProductCard } from "../";
-import TableRow from "./TableRow";
+import TableRows from "./TableRows";
+import Aside from "./Aside";
+import ProductsHeaderList from "./ProductsHeaderList";
+
+const Table = styled.table`
+  border: 1px solid ${(p) => p.theme.borderColor};
+  border-collapse: collapse;
+
+  th,
+  td,
+  thead {
+    border-collapse: collapse;
+    border-bottom: 1px solid ${(p) => p.theme.borderColor};
+    border-right: 1px solid ${(p) => p.theme.borderColor};
+    padding: 0.5625rem 0.625rem;
+    text-align: left;
+    line-height: 1.125rem;
+  }
+`;
 
 const CompareTable = (props) => {
   const { products } = props;
 
-  const Table = styled.table`
-    border: 1px solid ${(p) => p.theme.borderColor};
-    border-collapse: collapse;
+  const [checkedValues, setCheckedValues] = useState(() => setInitialValues());
+  const [productsToCompare, setProductsToCompare] = useState(products);
+  console.log({ productsToCompare });
 
-    th,
-    td,
-    thead {
-      border-collapse: collapse;
-      border-bottom: 1px solid ${(p) => p.theme.borderColor};
-      border-right: 1px solid ${(p) => p.theme.borderColor};
-      padding: 0.5625rem 0.625rem;
-      text-align: left;
-      line-height: 1.125rem;
+  useEffect(() => {
+    const initialCheckedValues = setInitialValues();
+    setCheckedValues(initialCheckedValues);
+  }, [products]);
+
+  function setInitialValues() {
+    const initialCheckedValues = {};
+    products.ids.map((id) => (initialCheckedValues[id] = true));
+    return initialCheckedValues;
+  }
+
+  function handleCheckChange(e) {
+    //if box is checked
+    if (e.target.checked) {
+      setCheckedValues({ ...checkedValues, [e.target.value]: true });
+    } else {
+      //if box is unchecked
+      setCheckedValues({ ...checkedValues, [e.target.value]: false });
     }
-    tr:last-child,
-    tr:last-child td,
-    tr:last-child th {
-      //border-bottom: 0;
+  }
+
+  useEffect(() => {
+    console.log("run useEffect");
+    if (!checkedValues || !products) {
+      return;
     }
-    tr:last-child,
-    th:last-child,
-    td:last-child,
-    thead:last-of-type {
-      //border-right: 0;
+    const notCheckedArray = Object.keys(checkedValues).filter(
+      (item) => checkedValues[item] !== true
+    );
+    console.log({ notCheckedArray });
+
+    let clone = { ...products };
+    for (let key in clone) {
+      if (notCheckedArray.includes(key)) {
+        delete clone[key];
+        clone.ids = clone.ids.filter((id) => id !== key);
+      }
     }
-  `;
+    console.log({ clone });
+    setProductsToCompare(clone);
+  }, [checkedValues, products]);
 
   return (
     <>
       <Table>
         <thead>
           <tr>
-            <th />
-            {products.ids.map((id) => (
-              <th key={id}>
-                <ProductCard
-                  name={products[id].name}
-                  image={products[id].productImage}
-                  price={products[id].salePrice}
-                  uom={products[id].uom}
-                />
-              </th>
-            ))}
+            <th>
+              <Aside
+                products={products}
+                checked={checkedValues}
+                onChange={handleCheckChange}
+              />
+            </th>
+            <ProductsHeaderList products={productsToCompare} />
           </tr>
         </thead>
         <tbody>
-          <TableRow products={products} />
+          <TableRows products={productsToCompare} />
         </tbody>
       </Table>
     </>

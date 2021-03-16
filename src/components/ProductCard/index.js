@@ -9,11 +9,6 @@ const LinkWrapper = styled.a`
   cursor: pointer;
   overflow: hidden;
 
-  &:hover,
-  &:focus {
-    outline: none;
-    opacity: 0.9;
-  }
   display: flex;
   flex-direction: column;
 
@@ -30,6 +25,11 @@ const LinkWrapper = styled.a`
 
 const Name = styled.p`
   color: ${(p) => p.theme.titleColor};
+  &:hover,
+  &:focus {
+    outline: none;
+    opacity: 0.9;
+  }
 `;
 
 const Price = styled.p`
@@ -51,7 +51,7 @@ const ProductCard = (props) => {
     <div style={{ margin: "0 auto" }}>
       <LinkWrapper>
         <div>
-          <Img src={image} alt={name} width="100px" height="100px" />
+          <Img src={image} alt={name} width="100" height="100" />
         </div>
         <Name>{name}</Name>
       </LinkWrapper>
