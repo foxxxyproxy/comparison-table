@@ -6,7 +6,7 @@ import { mapItemsToObjects } from "./data-helpers";
 
 const Container = styled.main`
   width: 95%;
-  margin: 5vh auto;
+  margin: 2em auto;
 `;
 
 function App() {
@@ -17,9 +17,9 @@ function App() {
   }, []);
 
   return (
-    <>
+    <div style={{ width: "100%" }}>
       <Container>{products && <CompareTable products={products} />}</Container>
-    </>
+    </div>
   );
 }
 

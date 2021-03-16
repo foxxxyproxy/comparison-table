@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { features } from "../../data";
 import { sortByLabels } from "../../data-helpers";
 import Badges from "./Badges";
+import { TableHeader, TableData } from "./TableStyles";
 
 const TableRow = styled.tr`
   background: ${(props) =>
@@ -70,12 +71,12 @@ const TableRows = (props) => {
   return (
     <>
       <TableRow>
-        <th scope="row">Keurmerk</th>
+        <TableHeader scope="row">Keurmerk</TableHeader>
         {products.ids.map((id) => {
           return (
-            <td key={`Keurmerk${id}`}>
+            <TableData style={{ borderRight: 0 }} key={`Keurmerk${id}`}>
               <Badges linksList={products[id]["badges"]} />
-            </td>
+            </TableData>
           );
         })}
       </TableRow>
@@ -87,10 +88,14 @@ const TableRows = (props) => {
             isDiff={isDifferent(rows[feature.value], feature.value)}
             isEmpty={isEmpty(rows[feature.value])}
           >
-            <th scope="row">{feature.label}</th>
+            <TableHeader scope="row">{feature.label}</TableHeader>
 
             {rows[feature.value].map((row, index) => {
-              return <td key={feature.value + products.ids[index]}>{row}</td>;
+              return (
+                <TableData key={feature.value + products.ids[index]}>
+                  {row}
+                </TableData>
+              );
             })}
           </TableRow>
         );

@@ -6,14 +6,16 @@ const Img = styled.img`
 `;
 const ImageWrapper = styled.div`
   overflow: hidden;
+  display: flex;
+  flex-direction: row;
+
+  align-items: center;
 
   &:hover,
   &:focus {
     outline: none;
     opacity: 0.9;
   }
-  display: flex;
-  flex-direction: row;
 `;
 
 const Badges = (props) => {

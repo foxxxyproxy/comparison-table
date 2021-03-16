@@ -1,42 +1,38 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import styled from "styled-components";
 import TableRows from "./TableRows";
 import Aside from "./Aside";
 import ProductsHeaderList from "./ProductsHeaderList";
+import { TableHeader } from "./TableStyles";
 
 const Table = styled.table`
+  //width: 100%;
   border: 1px solid ${(p) => p.theme.borderColor};
   border-collapse: collapse;
+  text-align: left;
+  line-height: 1.125rem;
+`;
 
-  th,
-  td,
-  thead {
-    border-collapse: collapse;
-    border-bottom: 1px solid ${(p) => p.theme.borderColor};
-    border-right: 1px solid ${(p) => p.theme.borderColor};
-    padding: 0.5625rem 0.625rem;
-    text-align: left;
-    line-height: 1.125rem;
-  }
+const AsideHeader = styled(TableHeader)`
+  border-bottom: 0;
 `;
 
 const CompareTable = (props) => {
   const { products } = props;
 
+  const setInitialValues = useCallback(() => {
+    const initialCheckedValues = {};
+    products.ids.map((id) => (initialCheckedValues[id] = true));
+    return initialCheckedValues;
+  }, [products]);
+
   const [checkedValues, setCheckedValues] = useState(() => setInitialValues());
   const [productsToCompare, setProductsToCompare] = useState(products);
-  console.log({ productsToCompare });
 
   useEffect(() => {
     const initialCheckedValues = setInitialValues();
     setCheckedValues(initialCheckedValues);
-  }, [products]);
-
-  function setInitialValues() {
-    const initialCheckedValues = {};
-    products.ids.map((id) => (initialCheckedValues[id] = true));
-    return initialCheckedValues;
-  }
+  }, [products, setInitialValues]);
 
   function handleCheckChange(e) {
     //if box is checked
@@ -49,14 +45,13 @@ const CompareTable = (props) => {
   }
 
   useEffect(() => {
-    console.log("run useEffect");
     if (!checkedValues || !products) {
       return;
     }
+
     const notCheckedArray = Object.keys(checkedValues).filter(
       (item) => checkedValues[item] !== true
     );
-    console.log({ notCheckedArray });
 
     let clone = { ...products };
     for (let key in clone) {
@@ -65,7 +60,6 @@ const CompareTable = (props) => {
         clone.ids = clone.ids.filter((id) => id !== key);
       }
     }
-    console.log({ clone });
     setProductsToCompare(clone);
   }, [checkedValues, products]);
 
@@ -74,13 +68,13 @@ const CompareTable = (props) => {
       <Table>
         <thead>
           <tr>
-            <th>
+            <AsideHeader>
               <Aside
                 products={products}
                 checked={checkedValues}
                 onChange={handleCheckChange}
               />
-            </th>
+            </AsideHeader>
             <ProductsHeaderList products={productsToCompare} />
           </tr>
         </thead>

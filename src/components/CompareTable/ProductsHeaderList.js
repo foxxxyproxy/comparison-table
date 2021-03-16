@@ -1,4 +1,10 @@
 import { ProductCard } from "..";
+import styled from "styled-components";
+import { TableHeader } from "./TableStyles";
+
+const ProductsHeader = styled(TableHeader)`
+  border: 0;
+`;
 
 const ProductsHeaderList = (props) => {
   const { products } = props;
@@ -6,7 +12,7 @@ const ProductsHeaderList = (props) => {
   return (
     <>
       {products.ids.map((id) => (
-        <th key={`head${id}`}>
+        <ProductsHeader key={`head${id}`}>
           <ProductCard
             key={`card${id}`}
             name={products[id].name}
@@ -14,7 +20,7 @@ const ProductsHeaderList = (props) => {
             price={products[id].salePrice}
             uom={products[id].uom}
           />
-        </th>
+        </ProductsHeader>
       ))}
     </>
   );

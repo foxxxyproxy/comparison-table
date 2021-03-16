@@ -2,8 +2,8 @@ import styled from "styled-components";
 //import { NavLink } from "react-router-dom";
 
 const LinkWrapper = styled.a`
-  //max-width: 200px;
-  //min-height: 200px;
+  max-width: 400px;
+  min-width: 100px;
   display: none;
   text-decoration: none;
   cursor: pointer;
@@ -34,11 +34,14 @@ const Name = styled.p`
 
 const Price = styled.p`
   font-weight: 900;
-  font-size: 1.2rem;
+  font-size: 1.4rem;
+  margin-bottom: 0.5rem;
 `;
 const Uom = styled.p`
   text-transform: lowercase;
   font-weight: 300;
+  font-size: 0.9rem;
+  margin-top: 0.5em;
 `;
 const Img = styled.img`
   max-width: 100%;
@@ -48,7 +51,7 @@ const Img = styled.img`
 const ProductCard = (props) => {
   const { name, image, price, uom } = props;
   return (
-    <div style={{ margin: "0 auto" }}>
+    <div style={{ margin: "0 auto", width: "100%" }}>
       <LinkWrapper>
         <div>
           <Img src={image} alt={name} width="100" height="100" />
