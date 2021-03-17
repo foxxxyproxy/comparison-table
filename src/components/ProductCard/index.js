@@ -1,8 +1,26 @@
 import styled from "styled-components";
 //import { NavLink } from "react-router-dom";
+import TrashIcon from "../../assets/TrashIcon";
+
+const RemoveButton = styled.button`
+  position: relative;
+  left: 80%;
+  appearance: none;
+  background: 0;
+  border: 0;
+  cursor: pointer;
+  padding: 0.5em;
+
+  &:hover,
+  &:focus {
+    outline: none;
+    svg {
+      fill: red;
+    }
+  }
+`;
 
 const LinkWrapper = styled.a`
-  //max-width: 400px;
   min-width: 100px;
   display: none;
   text-decoration: none;
@@ -33,7 +51,7 @@ const Name = styled.p`
 `;
 
 const Price = styled.p`
-  font-weight: 900;
+  font-weight: 800;
   font-size: 1.4rem;
   margin-bottom: 0.5rem;
 `;
@@ -49,9 +67,12 @@ const Img = styled.img`
 `;
 
 const ProductCard = (props) => {
-  const { name, image, price, uom } = props;
+  const { id, name, image, price, uom, onRemove } = props;
   return (
     <div style={{ margin: "0 auto", width: "100%" }}>
+      <RemoveButton value={id} onClick={onRemove} aria-label={"remove item"}>
+        <TrashIcon />
+      </RemoveButton>
       <LinkWrapper>
         <div>
           <Img src={image} alt={name} width="100" height="100" />

@@ -11,7 +11,7 @@ const ProductsHeader = styled(TableHeader)`
 `;
 
 const ProductsHeaderList = (props) => {
-  const { products } = props;
+  const { products, onRemove } = props;
 
   return (
     <>
@@ -19,10 +19,12 @@ const ProductsHeaderList = (props) => {
         <ProductsHeader key={`head${id}`}>
           <ProductCard
             key={`card${id}`}
+            id={id}
             name={products[id].name}
             image={products[id].productImage}
             price={products[id].salePrice}
             uom={products[id].uom}
+            onRemove={onRemove}
           />
         </ProductsHeader>
       ))}

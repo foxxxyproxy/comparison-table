@@ -48,6 +48,10 @@ const CompareTable = (props) => {
     }
   }
 
+  function handleButtonClick(e) {
+    setCheckedValues({ ...checkedValues, [e.currentTarget.value]: false });
+  }
+
   useEffect(() => {
     if (!checkedValues || !products) {
       return;
@@ -79,7 +83,10 @@ const CompareTable = (props) => {
                 onChange={handleCheckChange}
               />
             </AsideHeader>
-            <ProductsHeaderList products={productsToCompare} />
+            <ProductsHeaderList
+              products={productsToCompare}
+              onRemove={handleButtonClick}
+            />
           </tr>
         </thead>
         <tbody>

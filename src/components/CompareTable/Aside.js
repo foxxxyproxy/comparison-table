@@ -7,6 +7,7 @@ const CheckboxWrapper = styled.aside`
   input {
     margin-right: 1em;
   }
+  font-weight: 600;
 `;
 
 const Container = styled.div`

@@ -10,12 +10,6 @@ const ImageWrapper = styled.div`
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-
-  &:hover,
-  &:focus {
-    outline: none;
-    opacity: 0.9;
-  }
 `;
 
 const Badges = (props) => {
@@ -34,8 +28,8 @@ const Badges = (props) => {
               key={`Badge${index}`}
               src={link}
               alt="Keurmerk"
-              width="40"
-              height="40"
+              width="35"
+              height="35"
             />
           );
         })}
