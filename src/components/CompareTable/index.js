@@ -1,29 +1,16 @@
 import { useEffect, useState, useCallback } from "react";
-import styled from "styled-components";
 import TableRows from "./TableRows";
 import Aside from "./Aside";
 import ProductsHeaderList from "./ProductsHeaderList";
-import { TableHeader } from "./TableStyles";
-
-const Table = styled.table`
-  display: block;
-  border-collapse: collapse;
-  text-align: left;
-  line-height: 1.125rem;
-
-  @media (max-width: 650px) {
-    overflow: auto;
-  }
-`;
-
-const AsideHeader = styled(TableHeader)`
-  border-bottom: 0;
-  border-top: 1px solid ${(p) => p.theme.borderColor};
-`;
+import { Table, AsideHeader } from "./TableStyles";
 
 const CompareTable = (props) => {
   const { products } = props;
 
+  /**
+   * set checkboxes "checked" by default
+   * @return {object} of checked values
+   */
   const setInitialValues = useCallback(() => {
     const initialCheckedValues = {};
     products.ids.map((id) => (initialCheckedValues[id] = true));
@@ -38,20 +25,33 @@ const CompareTable = (props) => {
     setCheckedValues(initialCheckedValues);
   }, [products, setInitialValues]);
 
+  /**
+   * OnChange: if box was checked - set as true
+   * if box was unchecked - set as false
+   * @param {event}
+   * @return {object} of checked values
+   */
   function handleCheckChange(e) {
-    //if box is checked
     if (e.target.checked) {
       setCheckedValues({ ...checkedValues, [e.target.value]: true });
     } else {
-      //if box is unchecked
       setCheckedValues({ ...checkedValues, [e.target.value]: false });
     }
   }
 
+  /**
+   * On button click: remove product from checkedValues
+   * @param {event}
+   * @return {object} of checked values
+   */
   function handleButtonClick(e) {
     setCheckedValues({ ...checkedValues, [e.currentTarget.value]: false });
   }
 
+  /**
+   * On change checked values or remove product: update product list to show
+   * @return {object} productsToCompare
+   */
   useEffect(() => {
     if (!checkedValues || !products) {
       return;

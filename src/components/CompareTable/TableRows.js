@@ -1,38 +1,30 @@
-import styled from "styled-components";
 import { useEffect, useState } from "react";
 import { features } from "../../utils/config";
 import { sortByLabels } from "../../utils/data-helpers";
 import Badges from "./Badges";
-import { TableHeader, TableData } from "./TableStyles";
-
-const TableRow = styled.tr`
-  background: ${(props) =>
-    props.isDiff ? props.theme.hightlightRow : props.theme.pageBackground};
-  display: ${(props) => (props.isEmpty ? "none" : "table-row")};
-`;
-
-const BadgesTableData = styled(TableData)`
-  border: 0;
-  padding-top: 0;
-  vertical-align: top;
-  :last-of-type {
-    border-right: 1px solid ${(p) => p.theme.borderColor};
-  }
-`;
+import {
+  TableHeader,
+  TableData,
+  TableRow,
+  BadgesTableData,
+} from "./TableStyles";
 
 const TableRows = (props) => {
-  const { products, className } = props;
+  const { products } = props;
   const [rows, setRows] = useState(null);
 
   useEffect(() => {
     features.sort(sortByLabels);
   }, []);
 
+  /**
+   * create rows from data
+   * @return {object} of rows where key = features
+   */
   useEffect(() => {
     const featuresList = features.map((item) => item.value);
     if (!featuresList) return;
 
-    //create rows from data
     const rawRows = featuresList.map((item) => {
       let featureType = features.find((feature) => feature.value === item).type;
 
@@ -51,10 +43,15 @@ const TableRows = (props) => {
     for (let i = 0; i < featuresList.length; i++) {
       rowsWithFeatures[featuresList[i]] = rawRows[i];
     }
-
     setRows(rowsWithFeatures);
   }, [setRows, products]);
 
+  /**
+   * check if the feature of row is for compare and if row has different values
+   * @param {row}
+   * @param {featureName}
+   * @return {boolean} true - if values are different
+   */
   function isDifferent(row, featureName) {
     let currentFeature = features.find(
       (feature) => feature.value === featureName
@@ -68,6 +65,11 @@ const TableRows = (props) => {
     return false;
   }
 
+  /**
+   * if the row is empty - don't show
+   * @param {row}
+   * @return {boolean} true - empty
+   */
   function isEmpty(row) {
     let set = new Set(row);
     if (set.size === 1 && set.has("")) {
@@ -93,7 +95,6 @@ const TableRows = (props) => {
         return (
           <TableRow
             key={feature.value}
-            className={className || feature.value}
             isDiff={isDifferent(rows[feature.value], feature.value)}
             isEmpty={isEmpty(rows[feature.value])}
           >

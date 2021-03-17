@@ -1,3 +1,5 @@
+export const MAX_PRODUCTS_TO_COMPARE = 4;
+
 export const features = [
   {
     value: "Toepassing",
@@ -43,7 +45,6 @@ export const features = [
     type: "String",
     toCompare: "false",
   },
-  //{ value: "badges", label: "Keurmerk", type: "String" },
   { value: "uom", label: "Uom", type: "String", toCompare: "true" },
   { value: "Kleur", label: "Kleur", type: "String", toCompare: "true" },
   {
@@ -93,5 +94,3 @@ export const features = [
   { value: "channel", label: "Channel", type: "String", toCompare: "false" },
   { value: "display", label: "Display", type: "String", toCompare: "false" },
 ];
-
-export const MAX_PRODUCTS_TO_COMPARE = 4;
