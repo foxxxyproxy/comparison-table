@@ -93,3 +93,5 @@ export const features = [
   { value: "channel", label: "Channel", type: "String", toCompare: "false" },
   { value: "display", label: "Display", type: "String", toCompare: "false" },
 ];
+
+export const MAX_PRODUCTS_TO_COMPARE = 4;

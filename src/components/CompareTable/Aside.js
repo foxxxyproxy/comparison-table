@@ -3,7 +3,7 @@ import styled from "styled-components";
 const CheckboxWrapper = styled.aside`
   display: flex;
   margin-bottom: 1em;
-  line-height: 1.2;
+  line-height: 1.5;
   input {
     margin-right: 1em;
   }
@@ -29,6 +29,7 @@ const Aside = (props) => {
         return (
           <CheckboxWrapper key={`check${index}`}>
             <input
+              style={{ lineHeight: 1.5, marginTop: "3px" }}
               type="checkbox"
               name={products[id].name}
               id={id}
