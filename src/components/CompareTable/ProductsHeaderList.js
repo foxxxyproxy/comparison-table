@@ -4,6 +4,10 @@ import { TableHeader } from "./TableStyles";
 
 const ProductsHeader = styled(TableHeader)`
   border: 0;
+  border-top: 1px solid ${(p) => p.theme.borderColor};
+  :last-of-type {
+    border-right: 1px solid ${(p) => p.theme.borderColor};
+  }
 `;
 
 const ProductsHeaderList = (props) => {

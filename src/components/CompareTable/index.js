@@ -6,15 +6,19 @@ import ProductsHeaderList from "./ProductsHeaderList";
 import { TableHeader } from "./TableStyles";
 
 const Table = styled.table`
-  //width: 100%;
-  border: 1px solid ${(p) => p.theme.borderColor};
+  display: block;
   border-collapse: collapse;
   text-align: left;
   line-height: 1.125rem;
+
+  @media (max-width: 650px) {
+    overflow: auto;
+  }
 `;
 
 const AsideHeader = styled(TableHeader)`
   border-bottom: 0;
+  border-top: 1px solid ${(p) => p.theme.borderColor};
 `;
 
 const CompareTable = (props) => {
@@ -64,7 +68,7 @@ const CompareTable = (props) => {
   }, [checkedValues, products]);
 
   return (
-    <>
+    <div style={{ width: "100%" }}>
       <Table>
         <thead>
           <tr>
@@ -82,7 +86,7 @@ const CompareTable = (props) => {
           <TableRows products={productsToCompare} />
         </tbody>
       </Table>
-    </>
+    </div>
   );
 };
 

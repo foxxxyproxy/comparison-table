@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import styled from "styled-components";
-import testProducts from "./data";
+import testProducts from "./utils/data";
 import { CompareTable } from "./components";
-import { mapItemsToObjects } from "./data-helpers";
+import { mapItemsToObjects } from "./utils/data-helpers";
 
 const Container = styled.main`
   width: 95%;

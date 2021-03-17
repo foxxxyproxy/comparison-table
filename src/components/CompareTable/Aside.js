@@ -3,7 +3,6 @@ import styled from "styled-components";
 const CheckboxWrapper = styled.aside`
   display: flex;
   margin-bottom: 1em;
-  font-size: 1rem;
   line-height: 1.2;
   input {
     margin-right: 1em;

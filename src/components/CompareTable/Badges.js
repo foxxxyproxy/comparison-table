@@ -2,14 +2,14 @@ import styled from "styled-components";
 
 const Img = styled.img`
   max-width: 100%;
-  margin-right: 0.5em;
+  margin-right: 0.2em;
+  margin-bottom: 0.2em;
 `;
 const ImageWrapper = styled.div`
   overflow: hidden;
   display: flex;
   flex-direction: row;
-
-  align-items: center;
+  flex-wrap: wrap;
 
   &:hover,
   &:focus {

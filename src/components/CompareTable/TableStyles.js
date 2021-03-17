@@ -1,19 +1,20 @@
 import styled from "styled-components";
 
 export const TableHeader = styled.th`
-  border-bottom: 1px solid ${(p) => p.theme.borderColor};
-  border-right: 1px solid ${(p) => p.theme.borderColor};
-  padding: 0.5625rem 0.625rem;
+  border: 1px solid ${(p) => p.theme.borderColor};
+  border-top: 0;
+  padding: 0.5rem 1.2rem;
   max-width: 400px;
 
   :first-of-type {
     width: 20em;
+    min-width: 11em;
+    font-weight: 600;
   }
 `;
 
 export const TableData = styled.td`
-  border-bottom: 1px solid ${(p) => p.theme.borderColor};
-  border-right: 1px solid ${(p) => p.theme.borderColor};
-  padding: 0.5625rem 0.625rem;
+  border: 1px solid ${(p) => p.theme.borderColor};
+  padding: 0.5625rem 1.2rem;
   max-width: 400px;
 `;

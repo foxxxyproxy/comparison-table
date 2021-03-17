@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { useEffect, useState } from "react";
-import { features } from "../../data";
-import { sortByLabels } from "../../data-helpers";
+import { features } from "../../utils/config";
+import { sortByLabels } from "../../utils/data-helpers";
 import Badges from "./Badges";
 import { TableHeader, TableData } from "./TableStyles";
 
@@ -9,6 +9,15 @@ const TableRow = styled.tr`
   background: ${(props) =>
     props.isDiff ? props.theme.hightlightRow : props.theme.pageBackground};
   display: ${(props) => (props.isEmpty ? "none" : "table-row")};
+`;
+
+const BadgesTableData = styled(TableData)`
+  border: 0;
+  padding-top: 0;
+  vertical-align: top;
+  :last-of-type {
+    border-right: 1px solid ${(p) => p.theme.borderColor};
+  }
 `;
 
 const TableRows = (props) => {
@@ -74,9 +83,9 @@ const TableRows = (props) => {
         <TableHeader scope="row">Keurmerk</TableHeader>
         {products.ids.map((id) => {
           return (
-            <TableData style={{ borderRight: 0 }} key={`Keurmerk${id}`}>
+            <BadgesTableData key={`Keurmerk${id}`}>
               <Badges linksList={products[id]["badges"]} />
-            </TableData>
+            </BadgesTableData>
           );
         })}
       </TableRow>

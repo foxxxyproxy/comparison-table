@@ -1,6 +1,5 @@
 import React from "react";
 import ReactDOM from "react-dom";
-
 import { createGlobalStyle } from "styled-components";
 import { normalize } from "styled-normalize";
 import { ThemeProvider } from "styled-components";
@@ -24,6 +23,13 @@ const GlobalStyle = createGlobalStyle`
 
     color: ${(p) => p.theme.textColor};
     background: ${(p) => p.theme.pageBackground};
+
+  }
+
+  body{
+    @media (max-width: 650px) {
+      font-size: 0.8rem;
+    }
   }
     
   ::before,
