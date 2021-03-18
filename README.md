@@ -14,12 +14,12 @@ Deployed prototype: https://comparison-table-alexignatova.vercel.app/ <br><br>
 
 ### TODO and thoughts
 
-I've decided to convert the data from API into a different format, that looks like an Object where keys = product ID and ids - an array of IDs. <br>
+I've decided to convert the data from API into a different format, that looks like an Object where keys = product's IDs and ids - an array of all the IDs. <br>
 ```javascript
 /**
  * @param {array} items = [{},{},{}]
- * @return {object} where key = id
- * @return {array} array of ids
+ * @return {object} where keys = ids
+ * @return {array} array of all ids
  */
 export function mapItemsToObjects(items) {
   const reducedItems = items.reduce(function (prevValue, currentValue) {
@@ -38,12 +38,11 @@ export function mapItemsToObjects(items) {
 }
 ```
 
-Now I use "Artikelnummer" as an ID, but we can change it easily in one place - inside the mapItemsToObjects(items) function. So if our data from API is changed or we decide to use a different ID it won't be hard.<br>
-Update: Sorry, I didn't know what is "SKU", but after googling it - yes, it would be better to use it as the product ID. Then even better that I can fix it very fast :)<br><br>
+Now I use "Artikelnummer" as an ID, but we can change it easily in only one place - inside the mapItemsToObjects(items) function. So if our data from API is changed or we decide to use a different ID it won't be hard.<br><br>
 
-There is a config.js file that contains a features array with all possible metrics: value, label, type, toCompare. So if we decide to add/edit/remove features or don't want to compare it anymore (or otherwise) we can do it only by editing the config.js file.<br><br>
+There is utils/config.js file that contains a features array with all possible metrics: value, label, type, toCompare. So if we decide to add/edit/remove features or don't want to compare it anymore (or otherwise) we can do it only by editing the config.js file.<br><br>
 
-Everything that related to API is in the API folder. If we decide to use axios instead of fetch, for example, or change the URL we will fix only one file.<br><br>
+Everything that related to API is in the API folder. If we decide to use axios instead of fetch (for example) or change the API URL we will fix only one file.<br><br>
 
 There is still a big room for improvement like adding more tests, split components into smaller ones to make it more reusable depending on future project needs. <br>
 
