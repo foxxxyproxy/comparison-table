@@ -2,12 +2,10 @@
 
 ### `How to run`
 
-    git clone https://github.com/foxxxyproxy/comparison-table.git (*)|| or unzip the folder you got
+    git clone https://github.com/foxxxyproxy/comparison-table.git
     cd comparison-table
     yarn install
     yarn start
-
-* I can give you access to the repository, but I need your GitHub username
 
 It runs the app in the development mode.<br>
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser <br>
