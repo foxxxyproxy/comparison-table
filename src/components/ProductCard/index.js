@@ -92,12 +92,23 @@ const ProductCard = (props) => {
   const { id, name, image, price, uom, onRemove } = props;
   return (
     <Container>
-      <RemoveButton value={id} onClick={onRemove} aria-label={"remove item"}>
+      <RemoveButton
+        value={id}
+        onClick={onRemove}
+        aria-label={"remove item"}
+        data-testid="product-remove-button"
+      >
         <TrashIcon />
       </RemoveButton>
       <LinkWrapper>
         <div style={{ minHeight: "100px" }}>
-          <Img src={image} alt={name} width="100" height="100" />
+          <Img
+            src={image}
+            alt={name}
+            width="100"
+            height="100"
+            data-testid="product-image"
+          />
         </div>
         <Name>{name}</Name>
       </LinkWrapper>

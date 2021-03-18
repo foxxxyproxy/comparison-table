@@ -36,8 +36,11 @@ const Aside = (props) => {
               value={id}
               onChange={onChange}
               checked={checked[id]}
+              data-testid="aside__checkbox"
             />
-            <label htmlFor={id}>{products[id].name}</label>
+            <label htmlFor={id} data-testid="aside__label">
+              {products[id].name}
+            </label>
           </CheckboxWrapper>
         );
       })}

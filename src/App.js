@@ -5,8 +5,6 @@ import { mapItemsToObjects } from "./utils/data-helpers";
 import useGetProducts from "./api/rest/products";
 import { MAX_PRODUCTS_TO_COMPARE } from "./utils/config";
 
-//import testData from "./utils/data";
-
 const Container = styled.main`
   width: 95%;
   margin: 2em auto;
@@ -19,8 +17,6 @@ const Title = styled.h1`
 function App() {
   const [products, setProducts] = useState(null);
   const { rawProducts, loading } = useGetProducts();
-
-  console.log(rawProducts);
 
   useEffect(() => {
     if (!rawProducts) {
